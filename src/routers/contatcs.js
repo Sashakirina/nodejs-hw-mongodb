@@ -20,4 +20,9 @@ router.patch(
 	"/contacts/:contactId",
 	ctrlWrapper(contactsControllers.patchContactController)
 );
+
+router.delete(
+	"/contacts/:contactId",
+	ctrlWrapper(contactsControllers.deleteContactController)
+);
 export default router;
