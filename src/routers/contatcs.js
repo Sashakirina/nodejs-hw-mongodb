@@ -16,4 +16,8 @@ router.post(
 	ctrlWrapper(contactsControllers.createContactController)
 );
 
+router.patch(
+	"/contacts/:contactId",
+	ctrlWrapper(contactsControllers.patchContactController)
+);
 export default router;
