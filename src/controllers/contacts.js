@@ -1,12 +1,25 @@
 import createHttpError from "http-errors";
 import * as contactsServices from "../services/contacts.js";
+import parsePaginationParams from "../utilits/parsePaginationParams.js";
+import parseSortParams from "../utilits/parseSortParams.js";
+import parseContactFilterParams from "../utilits/filter/parseContactFilterParams.js";
 
 export const getContactsController = async (req, res) => {
-	const contacts = await contactsServices.getAllContacts();
+	const { page, perPage } = parsePaginationParams(req.query);
+	const { sortBy, sortOrder } = parseSortParams(req.query);
+	const filter = parseContactFilterParams(req.query);
+
+	const data = await contactsServices.getContacts({
+		page,
+		perPage,
+		sortBy,
+		sortOrder,
+		filter,
+	});
 	res.status(200).json({
 		status: 200,
 		message: "Successfully found contacts!",
-		data: contacts,
+		data,
 	});
 };
 
@@ -37,7 +50,7 @@ export const createContactController = async (req, res) => {
 	});
 };
 
-export const patchContactController = async (req, res) => {
+export const patchContactController = async (req, res, next) => {
 	const { contactId } = req.params;
 
 	const result = await contactsServices.updateContact(
@@ -45,8 +58,8 @@ export const patchContactController = async (req, res) => {
 		req.body
 	);
 
-	if (!result) {
-		throw createHttpError(404, `Contact with id ${contactId} not found`);
+	if (!result.data) {
+		next(createHttpError(404, `Contact with id ${contactId} not found`));
 	}
 
 	res.status(200).json({
