@@ -1,7 +1,7 @@
 import { Router } from "express";
 import * as contactsControllers from "../controllers/contacts.js";
 import { ctrlWrapper } from "../utilits/ctrlWrapper.js";
-import { isValidId } from "../midellwares/isValidId .js";
+import { isValidId } from "../middlewares/isValidId .js";
 import { validateBody } from "../utilits/validateBody.js";
 import {
 	contactAddSchema,
