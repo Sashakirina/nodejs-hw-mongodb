@@ -1,8 +1,10 @@
 import createHttpError from "http-errors";
+import bcrypt from "bcrypt";
+import { randomBytes } from "crypto";
+
 import { UserCollection } from "../db/models/User.js";
 import { SessionCollection } from "../db/models/Session.js";
-import { randomBytes } from "crypto";
-import bcrypt from "bcrypt";
+
 import { FIFTEEN_MIN, ONE_DAY } from "../constans/auth.js";
 
 const createSession = () => {

@@ -1,13 +1,14 @@
 import express from "express";
 import cors from "cors";
-
-import { env } from "./utilits/env.js";
-import contactsRouter from "./routers/contatcs.js";
-import { errorHandler } from "./middlewares/errorHandler.js";
-import { notFoundHandler } from "./middlewares/notFoundHandler.js";
-import authRouter from "./routers/auth.js";
 import cookieParser from "cookie-parser";
 // import logger from './middlewares/logger.js';
+
+import contactsRouter from "./routers/contatcs.js";
+import authRouter from "./routers/auth.js";
+
+import { errorHandler } from "./middlewares/errorHandler.js";
+import { notFoundHandler } from "./middlewares/notFoundHandler.js";
+import { env } from "./utilits/env.js";
 
 const PORT = Number(env("PORT", "3000"));
 
