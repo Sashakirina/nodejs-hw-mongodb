@@ -5,7 +5,7 @@ import { env } from "./env.js";
 
 cloudinary.v2.config({
 	secure: true,
-	cloud_name: env("CLOUD_NAME"),
+	cloud_name: env("CLOUD_NAME", "dbg9wrimx"),
 	api_key: env("API_KEY"),
 	api_secret: env("API_SECRET"),
 });
