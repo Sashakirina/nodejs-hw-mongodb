@@ -152,9 +152,6 @@ export const resetPassword = async (payload, { sessionId }) => {
 	const session = await SessionCollection.findOne({
 		_id: sessionId,
 	});
-	if (!session) {
-		throw createHttpError(404, "Session not found");
-	}
 
 	await SessionCollection.deleteOne({ _id: session._id });
 
