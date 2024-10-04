@@ -135,7 +135,7 @@ export const requestResetToken = async (email) => {
 	}
 };
 
-export const resetPassword = async (payload, { sessionId }) => {
+export const resetPassword = async (payload) => {
 	const { data, error } = verifyToken(payload.token);
 	if (error) {
 		throw createHttpError(401, "Token invalid");
@@ -148,12 +148,6 @@ export const resetPassword = async (payload, { sessionId }) => {
 	if (!user) {
 		throw createHttpError(404, "User not found");
 	}
-
-	const session = await SessionCollection.findOne({
-		_id: sessionId,
-	});
-
-	await SessionCollection.deleteOne({ _id: session._id });
 
 	const hashedPassword = await bcrypt.hash(payload.password, 10);
 
